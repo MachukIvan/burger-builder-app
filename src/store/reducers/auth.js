@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../utility';
+import { updatedObject } from '../utility';
 
 const initialState = {
     token: null,
@@ -9,11 +9,11 @@ const initialState = {
 };
 
 const authStart = (state, action) => {
-    return updateObject(state, {error: null, loading: true});
+    return updatedObject(state, {error: null, loading: true});
 };
 
 const authSuccess = (state, action) => {
-    return updateObject(state, {
+    return updatedObject(state, {
         token: action.idToken,
         userId: action.userId,
         error: null,
@@ -22,7 +22,11 @@ const authSuccess = (state, action) => {
 };
 
 const authFail = (state, action) => {
-    return updateObject(state, {error: action.error, loading: false});
+    return updatedObject(state, {error: action.error, loading: false});
+};
+
+const authLogout = (state, action) => {
+    return updatedObject(state, {token: null, userId: null})
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,6 +34,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_START: return authStart(state, action);
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_FAIL: return authFail(state, action);
+        case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         default: return state;
     };
 };
