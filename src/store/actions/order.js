@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
-import { statement } from '@babel/template';
 
 export const purchaseBurgerSuccess = (id, orderData) => {
     return {
